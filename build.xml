@@ -87,9 +87,6 @@ To get started using Eclipse, execute "ant build-dev" and import the top-level
         </delete>
         <delete dir="${target.dir}" quiet="true"/>
         <delete dir="${omero.home}/test-output" quiet="true"/>
-        <delete includeemptydirs="true" quiet="true">
-            <fileset dir="${omero.home}/examples" includes="config.log,**/*.o,**/*.class,**/*.exe"/>
-        </delete>
         <ant antfile="build.xml" dir="docs/sphinx-api" target="clean" inheritAll="false"/>
     </target>
 
@@ -243,14 +240,6 @@ To get started using Eclipse, execute "ant build-dev" and import the top-level
         <antcall target="build-dist" inheritRefs="true" inheritAll="true"/>
     </target>
 
-    <target name="build-matlab" description="Provides a matlab toolbox under target. May required 'build-java'" depends="init">
-        <iterate buildpathref="OmeroMatlab.buildpath" target="tools-dist"/>
-        <iterate buildpathref="tools.buildpath" target="dist"/>
-        <!-- Parts of build-dist -->
-        <antcall target="copy-etc" inheritRefs="true" inheritAll="true"/>
-        <antcall target="update-version" inheritRefs="true" inheritAll="true"/>
-    </target>
-
     <target name="eclipse" depends="init">
         <tryEclipse settingsRef="ivy.toplevel" filter="true"/>
     </target>
@@ -333,19 +322,6 @@ To get started using Eclipse, execute "ant build-dev" and import the top-level
         <ivy:retrieve conf="test" pattern="${dist.dir}/lib/client/[artifact].[ext]" sync="false" log="quiet" settingsRef="ivy.toplevel"/>
     </target>
 
-    <target name="examples-java" description="Build and run OmeroJava examples">
-        <scons_py dir="${basedir}/examples">
-            <arg value="run_java=1"/>
-        </scons_py>
-    </target>
-
-    <target name="examples-py" description="Build and run OmeroPy examples">
-        <scons_py dir="${basedir}/examples" pythonpath="${env.PYTHONPATH}"><!-- omit OmeroPy/src -->
-            <arg value="run_py=1"/>
-            <arg value="no_java=1"/>
-        </scons_py>
-    </target>
-
     <target name="release-all" description="Produce all binary release artifacts (unsigned)"
         depends="release-clients,release-zip,release-docs">
    </target>
@@ -385,7 +361,7 @@ To get started using Eclipse, execute "ant build-dev" and import the top-level
     <target name="release-src" description="Package the git source tree into openmicroscopy-${omero.plainversion}.zip"
             depends="release-src-embed,release-src-git"/>
 
-    <target name="release-clients" description="Zip the Python, Java, and Matlab zips">
+    <target name="release-clients" description="Zip the Python and Java">
         <zip destfile="${omero.home}/target/OMERO.py-${omero.version}.zip">
             <zipfileset dir="${dist.dir}" prefix="OMERO.py-${omero.version}"
                 includes="bin/**,etc/**,lib/python/**,lib/fallback/**,sql/**,share/web/**" excludes="bin/omero"/>
@@ -398,11 +374,6 @@ To get started using Eclipse, execute "ant build-dev" and import the top-level
             <zipfileset dir="${blitz.comp}/generated"   prefix="OMERO.java-${omero.version}/src"  includes="**/*.java"/>
             <zipfileset dir="${insight.comp}/SRC"       prefix="OMERO.java-${omero.version}/src"  includes="**/*.java"/>
             <zipfileset dir="${dist.dir}/lib/client"    prefix="OMERO.java-${omero.version}/libs" includes="**/*.jar"/>
-        </zip>
-
-        <iterate buildpathref="OmeroMatlab.buildpath" target="release-zip"/>
-        <zip destfile="${omero.home}/target/OMERO.matlab-${omero.version}.zip">
-            <zipfileset dir="components/tools/OmeroM/target/matlab/" prefix="OMERO.matlab-${omero.version}" includes="**/*"/>
         </zip>
 
 	<copy todir="target">
@@ -623,13 +594,6 @@ To get started using Eclipse, execute "ant build-dev" and import the top-level
     <target name="release-hudson" depends="check-ivy"
             description="Saves to the hudson repository for dependent builds">
         <iterate buildpathref="all.buildpath" target="artifactory"/>
-    </target>
-
-    <target name="release-training" description="Produces a zip with the examples/Training files">
-        <zip destfile="${omero.home}/target/OMERO.training-${omero.version}.zip">
-            <zipfileset dir="${omero.home}/examples/Training" prefix="OMERO.training-${omero.version}" includes="**" excludes="markup.py"/>
-            <zipfileset dir="${omero.home}" prefix="OMERO.training-${omero.version}" includes="LICENSE.txt"/>
-        </zip>
     </target>
 
     <!--
