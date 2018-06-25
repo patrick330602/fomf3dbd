@@ -123,7 +123,7 @@ integration()
 {
     fold start integration
     if [ "x$TRAVIS_BRANCH" == "x" ]; then
-        FILES=$(git diff --name-only origin/develop...HEAD)
+        FILES=$(git diff --name-only origin/master...HEAD)
     else
         FILES=$(git diff --name-only HEAD...$TRAVIS_BRANCH)
     fi
