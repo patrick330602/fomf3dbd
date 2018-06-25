@@ -43,7 +43,7 @@ scons.log
 test-output
 temp-testng-customsuite.xml
 .settings
-.springBeans
+.springBean
 /components/tools/OmeroWeb/omeroweb/media/webtest
 /components/tools/OmeroWeb/omeroweb/static/
 /components/var
