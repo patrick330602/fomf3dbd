@@ -1,0 +1,15 @@
+<ivy-module version="1.0">
+  <info organisation="omero" module="main" revision="${omero.version}" status="integration"/>
+  <configurations>
+    <conf name="build"/>
+    <conf name="client"/>
+    <conf name="server"/>
+  </configurations>
+  <publications>
+    <artifact name="main" type="zip"/>
+  </publications>
+  <dependencies>
+    <dependency name="blitz" rev="${omero.version}" changing="true" conf="build,server->server"/>
+    <dependency name="insight" rev="${omero.version}" changing="true" conf="build,client->client"/>
+  </dependencies>
+</ivy-module>

@@ -1,0 +1,12 @@
+language: python
+
+sudo: required
+
+services:
+  - docker
+
+before_install:
+  - git clone --recurse-submodules git://github.com/openmicroscopy/omero-test-infra .omero
+
+script:
+  - .omero/docker scripts

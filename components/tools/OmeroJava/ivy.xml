@@ -1,0 +1,46 @@
+<ivy-module version="1.0" xmlns:m="http://ant.apache.org/ivy/maven">
+<!--
+#~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+#
+# $Id$
+#
+# Copyright 2008 Glencoe Software, Inc. All rights reserved.
+# Use is subject to license terms supplied in LICENSE.txt
+#
+#~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+#~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+# Written by:  Josh Moore, josh at glencoesoftware.com
+#~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+-->
+  <info
+      organisation="omero"
+      module="omero_client"
+      status="integration"/>
+  <configurations>
+    <conf name="build"/>
+    <conf name="client"/>
+  </configurations>
+  <publications>
+    <artifact name="omero_client" type="jar"/>
+    <artifact name="omero_client" type="pom"/>
+    <artifact name="omero_client" type="source" ext="jar" m:classifier="sources"/>
+    <artifact name="omero_client" type="javadoc" ext="jar" m:classifier="javadoc"/>
+  </publications>
+  <dependencies>
+    <!-- Internal -->
+    <dependency org="omero" name="blitz" rev="${omero.version}" changing="true" conf="build->build"/>
+    <!-- Bio-Formats -->
+    <dependency org="${org.bioformats}" name="formats-bsd" rev="${versions.bioformats}" transitive="true">
+        <exclude org="org.perf4j"/>
+        <exclude org="org.slf4j"/>
+        <exclude org="xml-apis"/>
+        <exclude org="xml-apis"/>
+    </dependency>
+    <dependency org="${org.bioformats}" name="formats-gpl" rev="${versions.bioformats}" transitive="true">
+        <exclude org="org.slf4j"/>
+    </dependency>
+  </dependencies>
+</ivy-module>
+
