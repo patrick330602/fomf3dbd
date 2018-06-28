@@ -52,29 +52,17 @@ def notification(msg, prio):
 
 
 def java_omero(args):
-    command = [find_java()]
+    command = ["java"]
     p = os.path.join(os.path.curdir, "lib", "log4j-build.xml")
     command.append("-Dlog4j.configuration=%s" % p)
     command.append(BUILD_PY)
-    command.extend(calculate_memory_args())
+    command.extend(["-Xmx600M", "-XX:MaxPermSize=256m","-XX:+IgnoreUnrecognizedVMOptions"])
     command.extend(["omero"])
     if isinstance(args, str):
         command.append(args)
     else:
         command.extend(args)
     execute(command)
-
-
-def find_java():
-    return "java"
-
-
-def calculate_memory_args():
-    return (
-        "-Xmx600M",
-        "-XX:MaxPermSize=256m",
-        "-XX:+IgnoreUnrecognizedVMOptions"
-    )
 
 
 def handle_tools(args):

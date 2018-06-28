@@ -1,0 +1,16 @@
+#!/usr/bin/env bash
+
+case $1 in
+	start)
+	lxtask &
+	sudo service postgresql start
+	sudo service nginx start
+	OMERO.server/bin/omero admin start
+	OMERO.server/bin/omero web start
+	;;
+	stop)
+	OMERO.server/bin/omero web stop
+	OMERO.server/bin/omero admin stop
+	;;
+esac
+
