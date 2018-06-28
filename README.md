@@ -1,12 +1,8 @@
-# omcsf
+# fomf3dbd
 
-OMCSF is a direct fork of `develop` branch of [openmicroscopy](https://github.com/openmicroscopy)/[openmicroscopy](https://github.com/openmicroscopy/openmicroscopy) on commit [aafbd2d](https://github.com/openmicroscopy/openmicroscopy/commit/aafbd2dac41d3f8e10652ba8669d0e00d5b8bb64). This is intended to be built as a bio-data management system. 
+a Fork of OMero for 3D Biological Data
 
-## Explanation
-
-> Why a seperate repository instead of fork directly?
-
-The origin repository is way too large for us. it's 1.8 Gigabytes and we have a limited network, and we need to build on a clean branch. 
+fomf3dbd is a direct fork of `develop` branch of [openmicroscopy](https://github.com/openmicroscopy)/[openmicroscopy](https://github.com/openmicroscopy/openmicroscopy) on commit [be2754b](https://github.com/openmicroscopy/openmicroscopy/commit/be2754b18570ea97ee4e122116304461470181df). This is intended to be built as a bio-data management system.
 
 ## Credit
 
