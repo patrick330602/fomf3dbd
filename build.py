@@ -56,7 +56,7 @@ def java_omero(args):
     p = os.path.join(os.path.curdir, "lib", "log4j-build.xml")
     command.append("-Dlog4j.configuration=%s" % p)
     command.append(BUILD_PY)
-    command.extend(["-Xmx600M", "-XX:MaxPermSize=256m","-XX:+IgnoreUnrecognizedVMOptions"])
+    command.extend(calculate_memory_args())
     command.extend(["omero"])
     if isinstance(args, str):
         command.append(args)
@@ -64,6 +64,12 @@ def java_omero(args):
         command.extend(args)
     execute(command)
 
+def calculate_memory_args(): 
+    return ( 
+        "-Xmx600M", 
+        "-XX:MaxPermSize=256m", 
+        "-XX:+IgnoreUnrecognizedVMOptions"
+        )
 
 def handle_tools(args):
     _ = os.path.sep.join
