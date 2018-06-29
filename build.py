@@ -64,12 +64,14 @@ def java_omero(args):
         command.extend(args)
     execute(command)
 
-def calculate_memory_args(): 
-    return ( 
-        "-Xmx600M", 
-        "-XX:MaxPermSize=256m", 
+
+def calculate_memory_args():
+    return (
+        "-Xmx600M",
+        "-XX:MaxPermSize=256m",
         "-XX:+IgnoreUnrecognizedVMOptions"
         )
+
 
 def handle_tools(args):
     _ = os.path.sep.join
