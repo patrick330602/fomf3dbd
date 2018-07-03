@@ -2,7 +2,7 @@
 
 case $1 in
 	start)
-	lxtask &
+	pgrep "lxtask" || lxtask &
 	sudo service postgresql start
 	sudo service nginx start
 	OMERO.server/bin/omero admin start
